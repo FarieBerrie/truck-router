@@ -1,0 +1,22 @@
+{
+  "name": "truck-router",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Plan trash-pickup truck routes from GPS points and track each stop on a satellite map",
+  "workspaces": [
+    "server",
+    "client"
+  ],
+  "scripts": {
+    "dev": "concurrently -n server,client -c blue,magenta \"npm run dev -w server\" \"npm run dev -w client\"",
+    "build": "npm run build -w client",
+    "start": "npm run start -w server",
+    "test": "npm test -w server"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  },
+  "engines": {
+    "node": ">=22.13"
+  }
+}

@@ -1,0 +1,22 @@
+# Render Blueprint: in the Render dashboard choose New → Blueprint and select this repo.
+services:
+  - type: web
+    name: truck-router
+    runtime: node
+    plan: starter # a persistent disk (for the SQLite database) requires a paid instance
+    branch: main
+    # --include=dev: Vite is a devDependency and must be installed to build the client.
+    buildCommand: npm install --include=dev && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: "24"
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_FILE
+        value: /var/data/truck-router.db
+    disk:
+      name: data
+      mountPath: /var/data
+      sizeGB: 1
